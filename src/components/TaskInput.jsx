@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 
-function TaskInput() {
-  const [data, setData] = useState("");
+function TaskInput({ data, onChange }) {
   return (
     <div>
-      <input
-        type="text"
-        value={data}
-        onChange={(event) => setData(event.target.value)}
-      />
+      <input type="text" value={data} onChange={onChange} className=" bg-black"/>
     </div>
   );
 }
