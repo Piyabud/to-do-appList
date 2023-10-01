@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TaskInput from "./components/TaskInput";
 import TaskButton from "./components/TaskButton";
 import TaskLists from "./components/TaskLists";
+import SnackBar from "./components/Snackbar";
 
 function App() {
   const [data, setData] = useState("");
@@ -10,6 +11,9 @@ function App() {
     const parsedItem = JSON.parse(getItemInLocalStorage); //แปลง string เป็น JsonJS
     return parsedItem || [];
   });
+
+  const [editData, setEditData] = useState("");
+  const [editIndex, setEditIndex] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("todo", JSON.stringify(todos));
@@ -20,15 +24,16 @@ function App() {
   };
 
   const addTask = () => {
+    if (data.trim() === "") {
+      displaySnackbar("Task list empty! Please input your to-dos.", "warning");
+      return;
+    }
     let todoArraysObj = [...todos];
     todoArraysObj.push({ todo: data, isComplete: false });
     setTodos(todoArraysObj);
     localStorage.setItem("todo", JSON.stringify(todoArraysObj));
     setData(""); // เคลียร์ข้อมูลใน input
   };
-  
-  console.log(data);
-  // console.log(todos);
 
   const deleteTask = (index) => {
     let todoArraysObj = [...todos];
@@ -36,53 +41,83 @@ function App() {
     setTodos(todoArraysObj);
     localStorage.setItem("todo", JSON.stringify(todoArraysObj));
   };
-  
 
   const completeTask = (index) => {
-    let todoArraysObj = [...todos];
-    todoArraysObj[index].isComplete = !todoArraysObj[index].isComplete;
-    setTodos(todoArraysObj);
-    localStorage.setItem("todo", JSON.stringify(todoArraysObj));
+    const updatedTodos = [...todos];
+    updatedTodos[index].isComplete = !updatedTodos[index].isComplete;
+    setTodos(updatedTodos);
+    localStorage.setItem("todo", JSON.stringify(updatedTodos));
   };
-  
-  // const onKeypress = (e) => {
-  //   if (e.key === "enter") {
-  //     addTask(data);
-  //     setData("");
-  //   }
-  // };
 
-  function onKeyDown(e) {
+  const onKeyDown = (e) => {
     if (e.key === "Enter") {
       if (e.target.value === "") {
-        alert("Task list empty! Please input your to-dos.");
+        displaySnackbar(
+          "Task list empty! Please input your to-dos.",
+          "warning"
+        );
       } else {
         addTask(data);
         setData("");
       }
     }
+  };
+
+  const editTask = (index) => {
+    setEditIndex(index);
+    setEditData(todos[index].todo);
+  };
+  function displaySnackbar(message, status) {
+    setOpenSnackBar(false);
+    setSnackbarMes(message);
+    setSnackbarStatus(status);
+    setOpenSnackBar(true);
   }
+  const [openSnackbar, setOpenSnackBar] = useState(false);
+  const [snackBarMes, setSnackbarMes] = useState("");
+  const [snackbarStatus, setSnackbarStatus] = useState("");
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackBar(false);
+  };
   return (
-    <div className="w-full h-[100vh] bg-green-800 flex justify-center items-center">
-      {/* BODY-AREA */}
-      <div className="w-1/2 h-1/2 flex flex-col justify-center items-center gap-4 text-xl bg-yellow-100 px-10 ">
-        <div className="w-[calc(100vw/6)] flex justify-between gap-4 ">
-          <TaskInput
-            data={data}
-            onChange={onChange}
-            className=" h-2"
-            onKeyDown={onKeyDown}
+    <>
+      <SnackBar
+        open={openSnackbar}
+        onClose={handleClose}
+        severity={snackbarStatus}
+        message={snackBarMes}
+      />
+      <div className="w-full h-[100vh] bg-green-800 flex justify-center items-center">
+        {/* BODY-AREA */}
+        <div className="w-1/2 h-auto flex flex-col justify-center items-center gap-4 text-xl bg-yellow-500 px-10 py-10 ">
+          <div className="w-auto p-4 flex justify-between gap-4 ">
+            <TaskInput
+              data={data}
+              onChange={onChange}
+              className=""
+              onKeyDown={onKeyDown}
+            />
+            <TaskButton onClick={addTask}>Submit</TaskButton>
+          </div>
+          {/* DISPLAY */}
+          <TaskLists
+            todos={todos}
+            deleteTask={deleteTask}
+            completeTask={completeTask}
+            editTask={editTask}
+            editIndex={editIndex} // เพิ่ม prop editIndex
+            editData={editData} // เพิ่ม prop editData
+            setEditData={setEditData}
+            setEditIndex={setEditIndex}
           />
-          <TaskButton onClick={addTask}>Submit</TaskButton>
         </div>
-        {/* DISPLAY */}
-        <TaskLists
-          todos={todos}
-          deleteTask={deleteTask}
-          completeTask={completeTask}
-        />
       </div>
-    </div>
+    </>
   );
 }
 
