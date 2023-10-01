@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 
-function TaskInput({ data, onChange }) {
+function TaskInput({ data, onChange, onKeyDown }) {
   return (
     <div>
-      <input type="text" value={data} onChange={onChange} className=" bg-black"/>
+      <input
+        type="text"
+        value={data}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        className=""
+      />
     </div>
   );
 }
