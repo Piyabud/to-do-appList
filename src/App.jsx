@@ -92,10 +92,10 @@ function App() {
         severity={snackbarStatus}
         message={snackBarMes}
       />
-      <div className="w-full h-[100vh] bg-green-800 flex justify-center items-center">
+      <div className="w-full h-[100vh] px-10 bg-green-800 flex justify-center items-center">
         {/* BODY-AREA */}
-        <div className="w-1/2 h-auto flex flex-col justify-center items-center gap-4 text-xl bg-yellow-500 px-10 py-10 ">
-          <div className="w-auto p-4 flex justify-between gap-4 ">
+        <div className="flex flex-col justify-center items-center gap-2 text-xl bg-pink-500 px-[10px] py-[30px] ">
+          <div className="w-auto p-4 flex flex-row justify-center items-center gap-2 ">
             <TaskInput
               data={data}
               onChange={onChange}

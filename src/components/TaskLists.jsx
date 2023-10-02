@@ -11,25 +11,29 @@ function TaskLists({
   setEditIndex,
 }) {
   return (
-    <div className="w-full h-full flex flex-col gap-4 bd-check1">
+    <div className="">
       {todos.map((todo, index) => (
         <div
           key={index}
-          className={`flex justify-between items-center ${
+          className={`flex flex-col justify-start items-center ${
             todo.isComplete ? "line-through text-gray-400" : ""
           } `}
         >
           {editIndex === index ? (
-            <div className="w flex flex-row justify-between items-center gap-10">
-              <input
-                type="text"
-                value={editData}
-                onChange={(e) => setEditData(e.target.value)}
-                className="flex-3"
-              />
-              <div className="flex justify-center items-center gap-4 flex-1">
+            <div className=" flex flex-row justify-start items-center gap-[6px]">
+              <div className="">
+                <input
+                  type="text"
+                  value={editData}
+                  onChange={(e) => setEditData(e.target.value)}
+                  className=" relative  flex-3 py-[10px] px-[16px] rounded-md 
+                border border-[#e4e6ed] border-solid
+                 focus:border-none focus:border focus:border-[#f47e20] "
+                />
+              </div>
+              <div className="flex gap-[4px] ">
                 <button
-                  className="btn"
+                  className="text-[12px] py-[12px] px-[8px] rounded-lg border-none"
                   onClick={() => {
                     const updatedTodos = [...todos];
                     updatedTodos[index].todo = editData;
@@ -38,36 +42,46 @@ function TaskLists({
                     localStorage.setItem("todo", JSON.stringify(updatedTodos));
                   }}
                 >
-                  Save
+                  ✔️
                 </button>
                 <button
-                  className="btn"
+                  className="text-[12px] py-[12px] px-[8px] rounded-lg border-none"
                   onClick={() => {
                     setEditIndex(null);
                     setEditData("");
                   }}
                 >
-                  Cancel
+                  ❌
                 </button>
               </div>
             </div>
           ) : (
-            <div className="flex flex-row justify-between">
+            <div className="bd-check3  flex items-center ">
+              {/* CHECKBOX */}
               <input
-                className="border-2 border-red-500 border-dotted"
+                className="w-[18px] h-[18px]"
                 type="checkbox"
                 checked={todo.isComplete}
                 onChange={() => completeTask(index)}
               />
-              <span className="grow border-2 border-red-500 border-solid">
-                {todo.todo}
-              </span>
-              <div className="flex flex-row gap-4 justify-end items-center">
-                <button className="btn-img" onClick={() => editTask(index)}>
-                  <img src="../../public/file-edit.svg" alt="" />
+
+              {/* TITLE */}
+              <span className="bd-check2 text-xl ">{todo.todo}</span>
+              {/* BTN DEL EDIT */}
+              <div className="flex flex-row justify-end items-center gap-[4px]">
+                <button className="btn-img " onClick={() => editTask(index)}>
+                  <img
+                    src="../../public/file-edit.svg"
+                    alt=""
+                    className="w-[22px] h-[22px]"
+                  />
                 </button>
                 <button onClick={() => deleteTask(index)} className="btn-img">
-                  <img src="../../public/trash.svg" alt="" />
+                  <img
+                    src="../../public/trash.svg"
+                    alt=""
+                    className="w-[22px] h-[22px]"
+                  />
                 </button>
               </div>
             </div>
