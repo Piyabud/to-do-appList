@@ -26,7 +26,7 @@ function TaskLists({
                   type="text"
                   value={editData}
                   onChange={(e) => setEditData(e.target.value)}
-                  className=" py-[10px] px-[16px] w-[100%] rounded-md 
+                  className=" py-[10px] px-[16px] w-[100%] md:w-[75%] rounded-md 
                         border border-[#e4e6ed] border-solid
                         focus:border-none focus:border focus:border-[#f47e20] "
                   onKeyDown={(e) => {

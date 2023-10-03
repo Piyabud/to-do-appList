@@ -63,8 +63,6 @@ function App() {
     }
   };
 
-
-
   const editTask = (index) => {
     setEditIndex(index);
     setEditData(todos[index].todo);
@@ -98,9 +96,11 @@ function App() {
         {/* BODY-AREA */}
         <div className="text-xl px-[10px] py-[30px] ">
           <div className="flex justify-center mb-8 uppercase ">
-            <h1 className="text-4xl md:text-7xl font-extrabold text-[#f47e20]">To do List App</h1>
+            <h1 className="text-4xl md:text-7xl font-extrabold text-[#f47e20]">
+              To do List App
+            </h1>
           </div>
-          <div className="w-auto mb-10">
+          <div className="bd-check3 w-auto mb-10 md:mb-4 flex flex-col md:flex-row gap-4 md:justify-center ">
             <TaskInput
               data={data}
               onChange={onChange}
