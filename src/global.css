@@ -10,6 +10,10 @@
   font-family: "Rubik", sans-serif;
   font-size: 16px;
   font-weight: 500;
+  
+}
+.bg {
+  background-color: hsl(206, 50%, 25%);
 }
 
 /* input {

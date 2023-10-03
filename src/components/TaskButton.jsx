@@ -6,7 +6,7 @@ function TaskButton({ onClick, children }) {
       <button
         type="button"
         onClick={onClick}
-        className="hidden w-full px-[16px] py-[10px] rounded-lg border-none md:block "
+        className="btn w-full px-[16px] py-[10px] rounded-lg border-none  "
       >
         {children}
       </button>

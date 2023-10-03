@@ -63,6 +63,8 @@ function App() {
     }
   };
 
+
+
   const editTask = (index) => {
     setEditIndex(index);
     setEditData(todos[index].todo);
@@ -92,13 +94,13 @@ function App() {
         severity={snackbarStatus}
         message={snackBarMes}
       />
-      <div className="w-full h-[100vh] p-10 bg-green-800 overflow-auto ">
+      <div className="w-full h-[100vh] p-10 bg overflow-auto ">
         {/* BODY-AREA */}
-        <div className="text-xl bg-pink-500 px-[10px] py-[30px] ">
+        <div className="text-xl px-[10px] py-[30px] ">
           <div className="flex justify-center mb-8 uppercase ">
-            <h1 className="text-3xl font-extrabold">To do List App</h1>
+            <h1 className="text-4xl md:text-7xl font-extrabold text-[#f47e20]">To do List App</h1>
           </div>
-          <div className="w-auto mb-10  md:gap-2 ">
+          <div className="w-auto mb-10">
             <TaskInput
               data={data}
               onChange={onChange}
@@ -117,6 +119,7 @@ function App() {
             editData={editData} // เพิ่ม prop editData
             setEditData={setEditData}
             setEditIndex={setEditIndex}
+            onKeyDown={onKeyDown}
           />
         </div>
       </div>

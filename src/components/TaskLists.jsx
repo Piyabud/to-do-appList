@@ -11,25 +11,43 @@ function TaskLists({
   setEditIndex,
 }) {
   return (
-    <div className="flex flex-col gap-4 justify-between ">
+    <div className=" w-full flex flex-col gap-4 justify-between ">
       {todos.map((todo, index) => (
         <div
           key={index}
-          className={`${todo.isComplete ? "line-through text-gray-400" : ""} `}
+          className={`${
+            todo.isComplete ? "line-through text-gray-500 font-semibold" : ""
+          } `}
         >
           {editIndex === index ? (
-            <div className=" flex flex-row justify-start items-center gap-[6px]">
-              <div className="">
+            <div className=" flex flex-row w-full justify-between items-center gap-[12px]">
+              <div className=" flex-grow">
                 <input
                   type="text"
                   value={editData}
                   onChange={(e) => setEditData(e.target.value)}
-                  className=" relative  flex-3 py-[10px] px-[16px] rounded-md 
-                border border-[#e4e6ed] border-solid
-                 focus:border-none focus:border focus:border-[#f47e20] "
+                  className=" py-[10px] px-[16px] w-[100%] rounded-md 
+                        border border-[#e4e6ed] border-solid
+                        focus:border-none focus:border focus:border-[#f47e20] "
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      const updatedTodos = [...todos];
+                      updatedTodos[index].todo = editData;
+                      setEditIndex(null);
+                      setEditData("");
+                      localStorage.setItem(
+                        "todo",
+                        JSON.stringify(updatedTodos)
+                      );
+                    } else if (e.key === "Escape") {
+                      setEditIndex(null);
+                      setEditData("");
+                    }
+                  }}
                 />
               </div>
-              <div className="flex gap-[4px] ">
+              {/* BTN EDIT FORM */}
+              <div className="flex gap-[4px]">
                 <button
                   className="text-[12px] py-[12px] px-[8px] rounded-lg border-none"
                   onClick={() => {
@@ -54,18 +72,33 @@ function TaskLists({
               </div>
             </div>
           ) : (
-            <div className="bd-check3  flex items-center ">
-              {/* CHECKBOX */}
-              <input
-                className="w-[18px] h-[18px] mx-4"
-                type="checkbox"
-                checked={todo.isComplete}
-                onChange={() => completeTask(index)}
-              />
+            <div className="flex items-center justify-between ">
+              <div className=" flex-grow flex justify-start items-center ">
+                {/* CHECKBOX */}
+                <input
+                  className="w-[18px] h-[18px] mr-4"
+                  type="checkbox"
+                  checked={todo.isComplete}
+                  onChange={() => completeTask(index)}
+                />
 
-              {/* TITLE */}
-              <span className="bd-check2 text-xl ">{todo.todo}</span>
-              
+                {/* TITLE */}
+                <span
+                  className={` ${
+                    todo.isComplete
+                      ? " text-gray-500 font-semibold"
+                      : "text-[#f47e20]"
+                  }`}
+                >
+                  <div
+                    className="w-[180px] sm:w-full inline-block text-xl "
+                    style={{ overflowWrap: "break-word" }}
+                  >
+                    {todo.todo}
+                  </div>
+                </span>
+              </div>
+
               {/* BTN DEL EDIT */}
               <div className="">
                 <div className="flex flex-row justify-end items-center gap-[4px]">
