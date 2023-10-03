@@ -47,7 +47,7 @@ function TaskLists({
                 />
               </div>
               {/* BTN EDIT FORM */}
-              <div className="flex gap-[4px]">
+              <div className="flex gap-[4px] md:gap-[10px]">
                 <button
                   className="text-[12px] py-[12px] px-[8px] rounded-lg border-none"
                   onClick={() => {
