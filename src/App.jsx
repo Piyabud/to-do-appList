@@ -92,10 +92,13 @@ function App() {
         severity={snackbarStatus}
         message={snackBarMes}
       />
-      <div className="w-full h-[100vh] px-10 bg-green-800 flex justify-center items-center">
+      <div className="w-full h-[100vh] p-10 bg-green-800 overflow-auto ">
         {/* BODY-AREA */}
-        <div className="flex flex-col justify-center items-center gap-2 text-xl bg-pink-500 px-[10px] py-[30px] ">
-          <div className="w-auto p-4 flex flex-row justify-center items-center gap-2 ">
+        <div className="text-xl bg-pink-500 px-[10px] py-[30px] ">
+          <div className="flex justify-center mb-8 uppercase ">
+            <h1 className="text-3xl font-extrabold">To do List App</h1>
+          </div>
+          <div className="w-auto mb-10  md:gap-2 ">
             <TaskInput
               data={data}
               onChange={onChange}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function TaskInput({ data, onChange, onKeyDown }) {
   return (
-    <div>
+    <div className="w-full">
       <input
         type="text"
         value={data}

@@ -11,13 +11,11 @@ function TaskLists({
   setEditIndex,
 }) {
   return (
-    <div className="">
+    <div className="flex flex-col gap-4 justify-between ">
       {todos.map((todo, index) => (
         <div
           key={index}
-          className={`flex flex-col justify-start items-center ${
-            todo.isComplete ? "line-through text-gray-400" : ""
-          } `}
+          className={`${todo.isComplete ? "line-through text-gray-400" : ""} `}
         >
           {editIndex === index ? (
             <div className=" flex flex-row justify-start items-center gap-[6px]">
@@ -59,7 +57,7 @@ function TaskLists({
             <div className="bd-check3  flex items-center ">
               {/* CHECKBOX */}
               <input
-                className="w-[18px] h-[18px]"
+                className="w-[18px] h-[18px] mx-4"
                 type="checkbox"
                 checked={todo.isComplete}
                 onChange={() => completeTask(index)}
@@ -67,22 +65,31 @@ function TaskLists({
 
               {/* TITLE */}
               <span className="bd-check2 text-xl ">{todo.todo}</span>
+              
               {/* BTN DEL EDIT */}
-              <div className="flex flex-row justify-end items-center gap-[4px]">
-                <button className="btn-img " onClick={() => editTask(index)}>
-                  <img
-                    src="../../public/file-edit.svg"
-                    alt=""
-                    className="w-[22px] h-[22px]"
-                  />
-                </button>
-                <button onClick={() => deleteTask(index)} className="btn-img">
-                  <img
-                    src="../../public/trash.svg"
-                    alt=""
-                    className="w-[22px] h-[22px]"
-                  />
-                </button>
+              <div className="">
+                <div className="flex flex-row justify-end items-center gap-[4px]">
+                  {todo.isComplete ? null : (
+                    <button
+                      className="btn-img "
+                      onClick={() => editTask(index)}
+                    >
+                      <img
+                        src="../../public/file-edit.svg"
+                        alt=""
+                        className="w-[22px] h-[22px]"
+                      />
+                    </button>
+                  )}
+
+                  <button onClick={() => deleteTask(index)} className="btn-img">
+                    <img
+                      src="../../public/trash.svg"
+                      alt=""
+                      className="w-[22px] h-[22px]"
+                    />
+                  </button>
+                </div>
               </div>
             </div>
           )}
