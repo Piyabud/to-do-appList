@@ -100,7 +100,7 @@ function App() {
               To do List App
             </h1>
           </div>
-          <div className="bd-check3 w-auto mb-10 md:mb-4 flex flex-col md:flex-row gap-4 md:justify-center ">
+          <div className=" w-auto mb-10 md:mb-4 flex flex-col md:flex-row gap-4 md:justify-center ">
             <TaskInput
               data={data}
               onChange={onChange}

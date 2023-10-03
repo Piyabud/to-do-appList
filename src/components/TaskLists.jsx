@@ -101,7 +101,7 @@ function TaskLists({
 
               {/* BTN DEL EDIT */}
               <div className="">
-                <div className="flex flex-row justify-end items-center gap-[4px]">
+                <div className="flex flex-row justify-end items-center gap-[8px] md:gap-6">
                   {todo.isComplete ? null : (
                     <button
                       className="btn-img "
