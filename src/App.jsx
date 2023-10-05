@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import TaskInput from "./components/TaskInput";
 import TaskButton from "./components/TaskButton";
 import TaskLists from "./components/TaskLists";
-import SnackBar from "./components/Snackbar";
+import SnackBar from "./components/SnackBar.jsx";
 
 function App() {
   const [data, setData] = useState("");
