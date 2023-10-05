@@ -108,7 +108,7 @@ function TaskLists({
                       onClick={() => editTask(index)}
                     >
                       <img
-                        src="../../public/file-edit.svg"
+                        src="../../public/images/file-edit.svg"
                         alt=""
                         className="w-[22px] h-[22px]"
                       />
@@ -117,7 +117,7 @@ function TaskLists({
 
                   <button onClick={() => deleteTask(index)} className="btn-img">
                     <img
-                      src="../../public/trash.svg"
+                      src="../../public/images/trash.svg"
                       alt=""
                       className="w-[22px] h-[22px]"
                     />
